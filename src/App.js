@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
-import MyComponent from "./component/MyComponent";
+import EventPractice from "./component/EventPractice";
 
 function App() {
 	return (
-		<MyComponent name={"whee"}/>
+		// <MyComponent name={"whee"}/>
+		<EventPractice />
 	);
 }
 
