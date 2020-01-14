@@ -20,10 +20,28 @@ class IterationSample extends Component {
 		});
 	};
 
+	handleRemove = (index) => {
+		const {names} = this.state;
+
+		// splice 이용하는 방법도 있고
+		// names.splice(index, 1);
+
+		if (index > -1) {
+			this.setState({
+				// names,
+				names: names.filter((item, i) => {
+					return i !== index;
+				}),
+			});
+		}
+	};
+
 	render() {
 		const nameList = this.state.names.map((name, index) => {
 			return (
-				<li key={index}>
+				<li
+					key={index}
+					onDoubleClick={() => {this.handleRemove(index);}}>
 					{name}
 				</li>
 			);
