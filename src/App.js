@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import "./App.css";
-import FunctionalComponent from "./component/FunctionalComponent";
+import styles from "./App.module.css";
 
 class App extends Component {
 	render() {
 		return (
-			<div>
-				<FunctionalComponent name={"whee"}/>
+			<div className={styles.box}>
+
 			</div>
 		);
 	}
