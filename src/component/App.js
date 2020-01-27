@@ -28,7 +28,7 @@ class App extends Component {
 	};
 
 	handleInsert = () => {
-		const { todos, input} = this.state;
+		const {todos, input} = this.state;
 		const newTodo = {
 			id: this.getId(),
 			text: input,
@@ -38,7 +38,7 @@ class App extends Component {
 		this.setState({
 			todos: [...todos, newTodo],
 			input: '',
-		})
+		});
 	};
 
 	handleToggle = (id) => {
@@ -56,14 +56,27 @@ class App extends Component {
 		});
 	};
 
+	handleRemove = (id) => {
+		const {todos} = this.state;
+		const index = todos.findIndex(todo => todo.id === id);
+
+		if (index !== -1) {
+			todos.splice(index, 1);
+		}
+
+		this.setState({
+			todos,
+		});
+	};
+
 	render() {
 		const {input, todos} = this.state;
-		const {handleChange, handleInsert, handleToggle} = this;
+		const {handleChange, handleInsert, handleToggle, handleRemove} = this;
 
 		return (
 			<PageTemplate>
 				<TodoInput onChange={handleChange} value={input} onInsert={handleInsert}/>
-				<TodoList todos={todos} onToggle={handleToggle}/>
+				<TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
 			</PageTemplate>
 		);
 	}
