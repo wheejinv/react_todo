@@ -41,15 +41,29 @@ class App extends Component {
 		})
 	};
 
+	handleToggle = (id) => {
+		// id로 배열의 인덱스를 찾는다.
+		const {todos} = this.state;
+		const index = todos.findIndex(todo => todo.id === id);
+
+		// 찾은 데이터의 done 값을 반전시킵니다.
+		if (index !== -1) {
+			todos[index].done = !todos[index].done;
+		}
+
+		this.setState({
+			todos,
+		});
+	};
+
 	render() {
 		const {input, todos} = this.state;
-		const {handleChange} = this;
-		const {handleInsert} = this;
+		const {handleChange, handleInsert, handleToggle} = this;
 
 		return (
 			<PageTemplate>
 				<TodoInput onChange={handleChange} value={input} onInsert={handleInsert}/>
-				<TodoList todos={todos}/>
+				<TodoList todos={todos} onToggle={handleToggle}/>
 			</PageTemplate>
 		);
 	}
