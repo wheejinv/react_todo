@@ -46,13 +46,20 @@ class App extends Component {
 		const {todos} = this.state;
 		const index = todos.findIndex(todo => todo.id === id);
 
-		// 찾은 데이터의 done 값을 반전시킵니다.
-		if (index !== -1) {
-			todos[index].done = !todos[index].done;
-		}
+		// 찾은 데이터의 done 값을 반전시킨다.
+		const toggled = {
+			...todos[index],
+			done: !todos[index].done,
+		};
 
+		// slice를 사용하여 우리가 찾은 index 전후의 데이터를 복사한다.
+		// 그리고 그 사이에는 변경된 to do 객체를 넣어준다.
 		this.setState({
-			todos,
+			todos: [
+				...todos.slice(0, index),
+				toggled,
+				...todos.slice(index + 1, todos.length),
+			],
 		});
 	};
 
@@ -60,12 +67,12 @@ class App extends Component {
 		const {todos} = this.state;
 		const index = todos.findIndex(todo => todo.id === id);
 
-		if (index !== -1) {
-			todos.splice(index, 1);
-		}
-
+		// slice로 전후 데이터들을 복사하고, 우리가 찾은 index는 제외시킨다.
 		this.setState({
-			todos,
+			todos: [
+				...todos.slice(0, index),
+				...todos.slice(index + 1, todos.length),
+			],
 		});
 	};
 
